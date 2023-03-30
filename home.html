@@ -1,0 +1,94 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- HTML PADRAO -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CURSOS</title>
+  <!-- Adicionando o link do manifest -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body >
+  <!-- Criação do formulário para adicionar novos itens -->
+  <form  aling="center" id="form">
+    <input type="text" id="item" style="font-size: 25px;" placeholder="Digite um novo curso" required >
+    <button class="slide_from_left" type="submit">Adicionar</button>
+  </form>
+  
+   <button a class="slide_from_left" type="submit"><a href="index.html">Voltar home</a> </button>
+
+  <!-- Criação da lista de itens -->
+  <ul id="list">
+    <li>
+      <span class="date">Data conclusão: 01/01/2022</span>
+     CURSO: SQL</br>
+      <button class="edit slide_from_left" >Editar</button>
+    </li>
+    <li>
+      <span class="date">Data conclusão: 02/01/2022</span>
+     CURSO: PYTHON
+	  </br>
+      <button class="edit slide_from_left">Editar</button>
+    </li>
+    <li>
+      <span class="date">Data conclusão: 03/01/2022</span>
+     CURSO: POWER BI</br>
+      <button class="edit slide_from_left">Editar</button>
+    </li>
+  </ul>
+
+  <!-- Adicionando o script do service worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+          console.log('Service worker registrado com sucesso:', registration.scope);
+        }, function(err) {
+          console.log('Falha ao registrar o service worker:', err);
+        });
+      });
+    }
+  </script>
+
+  <!-- Adicionando o script do aplicativo -->
+  <script>
+    // Selecionando o formulário
+    const form = document.querySelector('#form');
+
+    // Selecionando a lista
+    const list = document.querySelector('#list');
+
+    // Adicionando um evento de submit para o formulário
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const item = document.querySelector('#item').value;
+      const date = new Date().toLocaleDateString('pt-BR');
+      const listItem = document.createElement('li');
+      listItem.innerHTML = `<span class="date">Data conclusão: ${date}</span> CURSO: ${item}</br> <button class="edit slide_from_left">Editar</button>`;
+      list.appendChild(listItem);
+      document.querySelector('#item').value = '';
+    });
+
+    // Adicionando um evento de click para a lista
+    list.addEventListener('click', function(event) {
+      if (event.target.classList.contains('edit')) {
+        const listItem = event.target.parentNode;
+        const itemText = listItem.textContent;
+        const editInput = document.createElement('input');
+        editInput.type = 'text';
+        editInput.value = itemText;
+        const saveButton = document.createElement('button');
+        saveButton.textContent = 'Salvar';
+        listItem.appendChild(editInput);
+        listItem.appendChild(saveButton);
+        event.target.style.display = 'none';
+        saveButton.addEventListener('click', function() {
+          listItem.textContent = editInput.value;
+          event.target.style.display = 'block';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

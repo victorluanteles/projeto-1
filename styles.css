@@ -1,0 +1,88 @@
+
+@font-face {
+  font-family: 'MinhaFonteBonita';
+  src: url('caminho/para/minha-fonte-bonita.ttf');
+}
+
+
+ body{
+  background-image:url("https://img.freepik.com/vetores-gratis/webinar-de-escuta-da-aluna-on-line_74855-6461.jpg?w=996&t=st=1680096783~exp=1680097383~hmac=aaecb865fe4fcdeb934c9b1f33293928142f2612e0c047b5892909bb2e9c110a");
+ background-repeat:repeat;
+   background-attachment:fixed;
+   background-size:100%;
+   color:#720117;
+    font-family: 'MinhaFonteBonita', sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: #333;
+  text-shadow: 1px 1px #fff;
+}
+
+span{
+  
+}
+
+
+ul {
+    padding: 0;
+    list-style: none;
+	 font-family: Verdana;
+ 
+}
+
+ul li a {
+    display: block;
+    padding: 10px 25px;
+
+    text-decoration: none;
+}
+ul li a:hover {
+    color: #fff;
+ 
+}
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+font-size: 25px;
+font-weight: bold;
+  background: #3498db;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+button:hover {
+  color: #3498db;
+}
+button::after {
+  content: "";
+  background: #ecf0f1;
+  position: absolute;
+  z-index: -1;
+  padding: 0.85em 0.75em;
+  display: block;
+}
+button[class^="slide"]::after {
+  transition: all 0.35s;
+}
+button[class^="slide"]:hover::after {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transition: all 0.35s;
+}
+button.slide_from_left::after {
+  top: 0;
+  bottom: 0;
+  left: -100%;
+  right: 100%;
+}
